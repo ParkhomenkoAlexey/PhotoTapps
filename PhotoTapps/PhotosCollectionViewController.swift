@@ -29,16 +29,22 @@ class PhotosCollectionViewController: UICollectionViewController {
 
     }
     
-    // MARK: UICollectionViewDataSource
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "pickPhotoSegue" {
+            let photoVC = segue.destination as! PhotoViewController
+            let cell = sender as! PhotoCell
+            photoVC.image = cell.dogImageView.image
+        }
+    }
+
+// MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return photos.count
     }
 
@@ -54,6 +60,7 @@ class PhotosCollectionViewController: UICollectionViewController {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
